@@ -50,6 +50,7 @@ enum BinlogType {
     Rollback = 2; // has start_ts.
     PreDDL   = 3; // has ddl_query, ddl_job_id.
     PostDDL  = 4; // has ddl_job_id.
+    Import   = 5; // has commit_ts.
 }
 
 // Binlog contains all the changes in a transaction, which can be used to reconstruct SQL statement, then export to
@@ -61,15 +62,15 @@ message Binlog {
     // It is used for pairing prewrite log to commit log or rollback log.
     optional int64         start_ts       = 2 [(gogoproto.nullable) = false];
 
-    // commit_ts is used only in binlog type Commit.
+    // commit_ts is used only in binlog type Commit and Import.
     optional int64         commit_ts      = 3 [(gogoproto.nullable) = false];
 
-    // prewrite key is used only in Prewrite binlog type.
+    // prewrite key is used only in Prewrite and Import binlog type.
     // It is the primary key of the transaction, is used to check that the transaction is
     // commited or not if it failed to pair to commit log or rollback log within a time window.
     optional bytes         prewrite_key   = 4;
 
-    // prewrite_data is marshalled from PrewriteData type,
+    // prewrite_data is marshalled from PrewriteData type, is used in Prewrite and Import binlog type.
     // we do not need to unmarshal prewrite data before the binlog have been successfully paired.
     optional bytes         prewrite_value = 5;
 
