@@ -65,7 +65,7 @@ message Binlog {
     // commit_ts is used only in binlog type Commit and Import.
     optional int64         commit_ts      = 3 [(gogoproto.nullable) = false];
 
-    // prewrite key is used only in Prewrite and Import binlog type.
+    // prewrite key is used only in Prewrite binlog type.
     // It is the primary key of the transaction, is used to check that the transaction is
     // commited or not if it failed to pair to commit log or rollback log within a time window.
     optional bytes         prewrite_key   = 4;

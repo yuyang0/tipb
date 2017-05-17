@@ -231,7 +231,7 @@ type Binlog struct {
 	StartTs int64 `protobuf:"varint,2,opt,name=start_ts,json=startTs" json:"start_ts"`
 	// commit_ts is used only in binlog type Commit and Import.
 	CommitTs int64 `protobuf:"varint,3,opt,name=commit_ts,json=commitTs" json:"commit_ts"`
-	// prewrite key is used only in Prewrite and Import binlog type.
+	// prewrite key is used only in Prewrite binlog type.
 	// It is the primary key of the transaction, is used to check that the transaction is
 	// commited or not if it failed to pair to commit log or rollback log within a time window.
 	PrewriteKey []byte `protobuf:"bytes,4,opt,name=prewrite_key,json=prewriteKey" json:"prewrite_key,omitempty"`
