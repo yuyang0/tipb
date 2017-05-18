@@ -70,7 +70,7 @@ message Binlog {
     // commited or not if it failed to pair to commit log or rollback log within a time window.
     optional bytes         prewrite_key   = 4;
 
-    // prewrite_data is marshalled from PrewriteData type, is used in Prewrite and Import binlog type.
+    // prewrite_data is marshalled from PrewriteData type,
     // we do not need to unmarshal prewrite data before the binlog have been successfully paired.
     optional bytes         prewrite_value = 5;
 
@@ -81,4 +81,7 @@ message Binlog {
     // If PreDDL has matching PostDDL with the same job_id, we can execute the DDL right away, otherwise,
     // we can use the job_id to check if the ddl statement has been successfully added to DDL job list.
     optional int64         ddl_job_id     = 7 [(gogoproto.nullable) = false];
+
+    // import_data is marshalled from PrewriteData type, is used only in Import binlog type.
+    optional bytes         import_data = 8;
 }
