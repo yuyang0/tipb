@@ -87,7 +87,7 @@ message SelectResponse {
 
     	// Use multiple chunks to reduce memory allocation and
         // avoid allocating large contiguous memory.
-    	repeated Chunk chunks = 3 [(gogoproto.nullable) = false];
+    	repeated Chunk chunks = 3;
 
 	repeated Error warnings = 4;
 }
