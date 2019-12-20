@@ -28,11 +28,35 @@ message ColumnInfo {
 	optional bool pk_handle = 21 [(gogoproto.nullable) = false]; // PK handle column value is row handle.
 }
 
+message Identity {
+	optional int64 num = 1;
+	optional string str = 2;
+}
+
+message PropertyInfo {
+	optional string name = 1 [(gogoproto.nullable) = false];
+	optional string tp = 2 [(gogoproto.nullable) = false];
+	optional bool notNull = 3 [(gogoproto.nullable) = false];
+}
+
+message VertexInfo {
+	optional string name = 1 [(gogoproto.nullable) = false];
+	repeated PropertyInfo properties = 2;
+}
+
+message EdgeInfo {
+	optional string name = 1 [(gogoproto.nullable) = false];
+	optional string srcLabel = 2 [(gogoproto.nullable) = false];
+	optional string destLabel = 3 [(gogoproto.nullable) = false];
+	repeated PropertyInfo properties = 4;
+}
+
 message IndexInfo {
-	optional int64 table_id = 1 [(gogoproto.nullable) = false];
-	optional int64 index_id = 2 [(gogoproto.nullable) = false];
-	repeated ColumnInfo columns = 3;
-	optional bool unique = 4 [(gogoproto.nullable) = false];
+	optional string name = 1 [(gogoproto.nullable) = false];
+	optional string graph = 2 [(gogoproto.nullable) = false];
+	optional string label = 3 [(gogoproto.nullable) = false];
+	repeated string properties = 4;
+	optional bool unique = 5 [(gogoproto.nullable) = false];
 }
 
 // KeyRange is the encoded index key range, low is closed, high is open. (low <= x < high)
